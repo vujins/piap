@@ -1,4 +1,4 @@
-package domain;
+package library.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,14 +9,14 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity {
 	
 	@Id
-	@GeneratedValue (strategy = GenerationType.AUTO)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	
