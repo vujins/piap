@@ -15,11 +15,11 @@ INSERT INTO gradska (id, linija, red_voznje)
 VALUES (2, 52, 'ponekad');
 
 INSERT INTO stajaliste (naziv)
-VALUES ('Beograd')
+VALUES ('Beograd');
 
 INSERT INTO stajaliste (naziv)
-VALUES ('Zrenjanin')
+VALUES ('Zrenjanin');
 
 INSERT INTO stajaliste (naziv)
-VALUES ('Novi Sad')
+VALUES ('Novi Sad');
 
