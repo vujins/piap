@@ -1,10 +1,12 @@
 package library.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import library.domain.Linija;
 import library.domain.Stajaliste;
 import library.repository.StajalisteRepository;
 
@@ -25,7 +27,7 @@ public class StajalisteService {
 		return stajalisteRepository.findAll();
 	}
 	
-	public void delete(Long id) {
-		stajalisteRepository.delete(id);
+	public Set<Linija> findLinijaFromStajaliste(String stajaliste_id) {
+		return stajalisteRepository.findLinijaFromStajaliste(stajaliste_id);
 	}
 }
