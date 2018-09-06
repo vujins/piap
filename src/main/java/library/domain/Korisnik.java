@@ -1,10 +1,15 @@
 package library.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -15,36 +20,46 @@ public class Korisnik {
 	public enum Zaposlen {
 		nezaposlen, zaposlen, student, lice_sa_invaliditetom, penzioner
 	}
-	
+
 	@Id
 	@NotNull
 	@Column(nullable = false)
 	private String username;
-	
+
 	@NotNull
 	@Column(nullable = false)
 	private String password;
 
-	//TODO staviti da budu svi @NotNull osim email-a
-	
+	// TODO staviti da budu svi @NotNull osim email-a
+
 	private String ime;
 	private String prezime;
-	
+
 	private String opstina;
 	private String grad;
 	private String adresa;
-	
+
 	private Date rodjendan;
 	private String telefon;
+	@Enumerated(EnumType.STRING)
 	private Zaposlen zaposlen;
-	
-	//flagovi
+
+	// flagovi
 	@Column(columnDefinition = "BIT default 0")
 	private boolean admin;
 	@Column(columnDefinition = "BIT default 0")
 	private boolean odobren;
-	
-	public Korisnik() {
+
+	@ManyToMany(targetEntity = LinijaMedjugradska.class)
+	@JoinTable(name = "korisnik_rezervacija")
+	private Set<LinijaMedjugradska> rezervacijaSet;
+
+	public Set<LinijaMedjugradska> getRezervacijaSet() {
+		return rezervacijaSet;
+	}
+
+	public void setRezervacijaSet(Set<LinijaMedjugradska> rezervacijaSet) {
+		this.rezervacijaSet = rezervacijaSet;
 	}
 
 	public String getUsername() {

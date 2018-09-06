@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -29,8 +30,10 @@ public abstract class Linija extends BaseEntity {
 	private Set<Stajaliste> stajalisteSet;
 	
 	@ManyToOne
+	@NotNull
 	private Stajaliste polaziste;
 	@ManyToOne
+	@NotNull
 	private Stajaliste odrediste;
 
 	public Set<Stajaliste> getStajalisteSet() {
