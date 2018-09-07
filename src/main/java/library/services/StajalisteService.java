@@ -27,7 +27,4 @@ public class StajalisteService {
 		return stajalisteRepository.findAll();
 	}
 	
-	public Set<Linija> findLinijaFromStajaliste(String stajaliste_id) {
-		return stajalisteRepository.findLinijaFromStajaliste(stajaliste_id);
-	}
 }

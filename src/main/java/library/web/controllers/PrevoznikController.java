@@ -1,0 +1,36 @@
+package library.web.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import library.domain.Prevoznik;
+import library.services.PrevoznikService;
+
+@RestController
+@RequestMapping("/prevoznik")
+public class PrevoznikController {
+
+	private PrevoznikService prevoznikService;
+
+	@Autowired
+	public PrevoznikController(PrevoznikService prevoznikService) {
+		super();
+		this.prevoznikService = prevoznikService;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public Prevoznik save(@RequestBody Prevoznik prevoznik) {
+		return prevoznikService.save(prevoznik);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public List<Prevoznik> findAll() {
+		return prevoznikService.findAll();
+	}
+	
+}

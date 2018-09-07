@@ -23,7 +23,6 @@ DROP TABLE IF EXISTS `gradska`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `gradska` (
-  `linija` int(11) NOT NULL,
   `red_voznje` varchar(255) DEFAULT NULL,
   `id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
@@ -37,7 +36,6 @@ CREATE TABLE `gradska` (
 
 LOCK TABLES `gradska` WRITE;
 /*!40000 ALTER TABLE `gradska` DISABLE KEYS */;
-INSERT INTO `gradska` VALUES (23,'nikad',1),(52,'ponekad',2);
 /*!40000 ALTER TABLE `gradska` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +58,7 @@ CREATE TABLE `korisnik` (
   `prezime` varchar(255) DEFAULT NULL,
   `rodjendan` datetime DEFAULT NULL,
   `telefon` varchar(255) DEFAULT NULL,
-  `zaposlen` int(11) DEFAULT NULL,
+  `zaposlen` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -71,7 +69,7 @@ CREATE TABLE `korisnik` (
 
 LOCK TABLES `korisnik` WRITE;
 /*!40000 ALTER TABLE `korisnik` DISABLE KEYS */;
-INSERT INTO `korisnik` VALUES ('milena',_binary '\0','Borova 1','Beograd','Milena',_binary '\0','Rakovica','milena123','Stevanovic','1996-06-26 00:00:00','065/8266996',2),('strahinja',_binary '','Tamiska 20','Zrenjanin','Strahinja',_binary '','Zrenjanin','strahinja123','Vujin','1995-02-15 00:00:00','062/1981-953',1);
+INSERT INTO `korisnik` VALUES ('milena',_binary '\0','Borova 1','Beograd','Milena',_binary '\0','Rakovica','milena123','Stevanovic','1996-06-26 00:00:00','065/8266996','2'),('strahinja',_binary '','Tamiska 20','Zrenjanin','Strahinja',_binary '','Zrenjanin','strahinja123','Vujin','1995-02-15 00:00:00','062/1981-953','1');
 /*!40000 ALTER TABLE `korisnik` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -84,10 +82,10 @@ DROP TABLE IF EXISTS `korisnik_rezervacija`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `korisnik_rezervacija` (
   `korisnik_username` varchar(255) NOT NULL,
-  `rezervacija_set_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`korisnik_username`,`rezervacija_set_id`),
-  KEY `FK42ipl4cj5dl6e2es63dd4l9ri` (`rezervacija_set_id`),
-  CONSTRAINT `FK42ipl4cj5dl6e2es63dd4l9ri` FOREIGN KEY (`rezervacija_set_id`) REFERENCES `medjugradska` (`id`),
+  `linija_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`korisnik_username`,`linija_id`),
+  KEY `FK3od3v9u4hv8vpqib82netfcv2` (`linija_id`),
+  CONSTRAINT `FK3od3v9u4hv8vpqib82netfcv2` FOREIGN KEY (`linija_id`) REFERENCES `medjugradska` (`id`),
   CONSTRAINT `FKhldumayrw8vevy4c85clm34oi` FOREIGN KEY (`korisnik_username`) REFERENCES `korisnik` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -98,6 +96,7 @@ CREATE TABLE `korisnik_rezervacija` (
 
 LOCK TABLES `korisnik_rezervacija` WRITE;
 /*!40000 ALTER TABLE `korisnik_rezervacija` DISABLE KEYS */;
+INSERT INTO `korisnik_rezervacija` VALUES ('strahinja',1),('strahinja',2),('strahinja',3),('milena',4),('milena',5);
 /*!40000 ALTER TABLE `korisnik_rezervacija` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,6 +109,7 @@ DROP TABLE IF EXISTS `linija`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `linija` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `linija_id` int(11) NOT NULL,
   `odrediste_id` bigint(20) NOT NULL,
   `polaziste_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
@@ -117,7 +117,7 @@ CREATE TABLE `linija` (
   KEY `FKqjhbu9y1yi6dumvrdr2nlywqe` (`polaziste_id`),
   CONSTRAINT `FKjvvmh3tnpl202yu9gr059bw03` FOREIGN KEY (`odrediste_id`) REFERENCES `stajaliste` (`id`),
   CONSTRAINT `FKqjhbu9y1yi6dumvrdr2nlywqe` FOREIGN KEY (`polaziste_id`) REFERENCES `stajaliste` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,35 +126,8 @@ CREATE TABLE `linija` (
 
 LOCK TABLES `linija` WRITE;
 /*!40000 ALTER TABLE `linija` DISABLE KEYS */;
-INSERT INTO `linija` VALUES (1,1,2),(2,1,3);
+INSERT INTO `linija` VALUES (1,1,4,1),(2,1,2,4),(3,1,3,2),(4,2,2,6),(5,2,3,2);
 /*!40000 ALTER TABLE `linija` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `linija_stajaliste`
---
-
-DROP TABLE IF EXISTS `linija_stajaliste`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `linija_stajaliste` (
-  `linija_id` bigint(20) NOT NULL,
-  `stajaliste_id` bigint(20) NOT NULL,
-  PRIMARY KEY (`linija_id`,`stajaliste_id`),
-  KEY `FKl14x8ugjfrbwre487pealgp41` (`stajaliste_id`),
-  CONSTRAINT `FKh21q8lvlkxnyn1n5vbnvwe47r` FOREIGN KEY (`linija_id`) REFERENCES `linija` (`id`),
-  CONSTRAINT `FKl14x8ugjfrbwre487pealgp41` FOREIGN KEY (`stajaliste_id`) REFERENCES `stajaliste` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `linija_stajaliste`
---
-
-LOCK TABLES `linija_stajaliste` WRITE;
-/*!40000 ALTER TABLE `linija_stajaliste` DISABLE KEYS */;
-INSERT INTO `linija_stajaliste` VALUES (2,4),(1,5);
-/*!40000 ALTER TABLE `linija_stajaliste` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -165,8 +138,9 @@ DROP TABLE IF EXISTS `medjugradska`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `medjugradska` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`)
+  `id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FKo38gunlis3ypn96qq8gc8k67u` FOREIGN KEY (`id`) REFERENCES `linija` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -176,6 +150,7 @@ CREATE TABLE `medjugradska` (
 
 LOCK TABLES `medjugradska` WRITE;
 /*!40000 ALTER TABLE `medjugradska` DISABLE KEYS */;
+INSERT INTO `medjugradska` VALUES (1),(2),(3),(4),(5);
 /*!40000 ALTER TABLE `medjugradska` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -190,7 +165,7 @@ CREATE TABLE `stajaliste` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `naziv` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -199,7 +174,7 @@ CREATE TABLE `stajaliste` (
 
 LOCK TABLES `stajaliste` WRITE;
 /*!40000 ALTER TABLE `stajaliste` DISABLE KEYS */;
-INSERT INTO `stajaliste` VALUES (1,'Beograd'),(2,'Novi Sad'),(3,'Zrenjanin'),(4,'Perlez'),(5,'Batajnica');
+INSERT INTO `stajaliste` VALUES (1,'Beograd'),(2,'Zrenjanin'),(3,'Subotica'),(4,'Perlez'),(5,'Batajnica'),(6,'Novi Sad');
 /*!40000 ALTER TABLE `stajaliste` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -212,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-09-06 13:40:20
+-- Dump completed on 2018-09-06 15:35:27

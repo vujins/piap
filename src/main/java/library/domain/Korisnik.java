@@ -1,6 +1,7 @@
 package library.domain;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -16,50 +18,65 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "korisnik")
 public class Korisnik {
-	
+
 	public enum Zaposlen {
 		nezaposlen, zaposlen, student, lice_sa_invaliditetom, penzioner
 	}
 
 	@Id
 	@NotNull
-	@Column(nullable = false)
 	private String username;
 
 	@NotNull
-	@Column(nullable = false)
 	private String password;
 
 	// TODO staviti da budu svi @NotNull osim email-a
 
+	@NotNull
 	private String ime;
+	@NotNull
 	private String prezime;
 
+	@NotNull
 	private String opstina;
+	@NotNull
 	private String grad;
+	@NotNull
 	private String adresa;
 
+	@NotNull
 	private Date rodjendan;
+	@NotNull
 	private String telefon;
+	private String email;
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Zaposlen zaposlen;
 
 	// flagovi
+	@NotNull
 	@Column(columnDefinition = "BIT default 0")
 	private boolean admin;
+	@NotNull
 	@Column(columnDefinition = "BIT default 0")
 	private boolean odobren;
 
+	// TODO zavrsi rezervaciju
+
 	@ManyToMany(targetEntity = LinijaMedjugradska.class)
-	@JoinTable(name = "korisnik_rezervacija")
-	private Set<LinijaMedjugradska> rezervacijaSet;
+	@JoinTable(name = "korisnik_rezervacija", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "medjugradska_id", referencedColumnName = "id"))
+	private Set<LinijaMedjugradska> rezervacija;
+
+	@ManyToMany
+	@JoinTable(name = "korisnik_poruka", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "poruka_id", referencedColumnName = "id"))
+	private List<Poruka> poruke;
 
 	public Set<LinijaMedjugradska> getRezervacijaSet() {
-		return rezervacijaSet;
+		return rezervacija;
 	}
 
-	public void setRezervacijaSet(Set<LinijaMedjugradska> rezervacijaSet) {
-		this.rezervacijaSet = rezervacijaSet;
+	public void setRezervacijaSet(Set<LinijaMedjugradska> rezervacija) {
+		this.rezervacija = rezervacija;
 	}
 
 	public String getUsername() {
@@ -156,6 +173,30 @@ public class Korisnik {
 
 	public void setOdobren(boolean odobren) {
 		this.odobren = odobren;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Set<LinijaMedjugradska> getRezervacija() {
+		return rezervacija;
+	}
+
+	public void setRezervacija(Set<LinijaMedjugradska> rezervacija) {
+		this.rezervacija = rezervacija;
+	}
+
+	public List<Poruka> getPoruke() {
+		return poruke;
+	}
+
+	public void setPoruke(List<Poruka> poruke) {
+		this.poruke = poruke;
 	}
 
 }

@@ -34,8 +34,8 @@ public class StajalisteController {
 		return stajalisteService.save(stajaliste);
 	}
 	
-	@RequestMapping(path = "{id}", method = RequestMethod.GET)
-	public Set<Linija> findLinijaFromStajaliste(@PathVariable("id") String stajaliste_id) {
-		return stajalisteService.findLinijaFromStajaliste(stajaliste_id);
-	}
+//	@RequestMapping(path = "{id}", method = RequestMethod.GET)
+//	public Set<Linija> findLinijaFromStajaliste(@PathVariable("id") String stajaliste_id) {
+//		return stajalisteService.findLinijaFromStajaliste(stajaliste_id);
+//	}
 }

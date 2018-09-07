@@ -3,9 +3,9 @@ package library.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import library.domain.Korisnik;
+import library.domain.Slika;
 
 @Repository
-public interface KorisnikRepository extends JpaRepository<Korisnik, String> {
+public interface SlikaRepository extends JpaRepository<Slika, Long> {
 
 }
