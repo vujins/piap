@@ -15,7 +15,7 @@ insert into slika (id, url)
 values (1, 'logo_prevoznika'), (2, 'slika_busa1'), (3, 'slika_busa1');
 
 insert into prevoznik (id, adresa, naziv, telefon, slika_id)
-values (1, 'adresa', 'naziv', 'telefon', 1);
+values (1, 'Zrenjanin', 'Lasta', 'telefon1', 1), (2, 'Kikinda', 'Autoprevoz Kikinda', 'telefon2', null);
 
 insert into autobus(id, broj_sedista, marka, model)
 values (1, 20, 'marka', 'model'), (2, 55, 'marka2', 'model2');
@@ -34,7 +34,7 @@ insert into linija (polaziste_id, odrediste_id)
 values (7, 8), (8, 9), (9, 10);
 
 insert into medjugradska (id, vozac_id, autobus_id, prevoznik_id, polazak, dolazak)
-values (1, 1, 1, 1, '2018-09-07 12:00', '2018-09-07 14:30'), (2, 1, 1, 1, '2018-09-03 11:00', '2018-09-04 19:30'), (3, 2, 2, 1, '2018-09-07 13:00', '2018-09-07 14:30');
+values (1, 1, 1, 1, '2018-09-07 12:00', '2018-09-07 14:30'), (2, 1, 1, 1, '2018-09-03 11:00', '2018-09-04 19:30'), (3, 2, 2, 2, '2018-09-07 13:00', '2018-09-07 14:30');
 
 insert into medjugradska_linija (medjugradska_id, linija_id)
 values (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (3, 6);

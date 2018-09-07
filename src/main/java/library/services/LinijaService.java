@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import library.domain.Linija;
+import library.domain.Stajaliste;
 import library.repository.LinijaRepository;
 
 @Service
@@ -25,6 +26,14 @@ public class LinijaService {
 	
 	public List<Linija> findAll() {
 		return linijaRepository.findAll();
+	}
+	
+	public Linija findOdredisteFromStajaliste(Stajaliste stajalaiste) {
+		return linijaRepository.findOdredisteFromStajaliste(stajalaiste);
+	}
+	
+	public Linija findPolazisteFromStajaliste(Stajaliste stajaliste) {
+		return linijaRepository.findPolazisteFromStajaliste(stajaliste);
 	}
 	
 }

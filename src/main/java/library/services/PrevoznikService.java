@@ -26,5 +26,7 @@ public class PrevoznikService {
 		return prevoznikRepository.findAll();
 	}
 	
-	
+	public Prevoznik findFromNaziv(String naziv) {
+		return prevoznikRepository.findFromNaziv(naziv);
+	}
 }
