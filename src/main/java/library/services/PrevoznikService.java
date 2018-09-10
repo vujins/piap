@@ -25,8 +25,4 @@ public class PrevoznikService {
 	public List<Prevoznik> findAll() {
 		return prevoznikRepository.findAll();
 	}
-	
-	public Prevoznik findFromNaziv(String naziv) {
-		return prevoznikRepository.findFromNaziv(naziv);
-	}
 }

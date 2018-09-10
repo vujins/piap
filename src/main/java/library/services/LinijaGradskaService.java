@@ -30,4 +30,8 @@ public class LinijaGradskaService {
 		linijaGradskaRepository.delete(id);
 	}
 	
+	public List<LinijaGradska> pretraga(Integer broj_linije, String polaziste, String odrediste){
+		return linijaGradskaRepository.pretraga(broj_linije, polaziste, odrediste);
+	}
+	
 }

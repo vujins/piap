@@ -28,12 +28,4 @@ public class LinijaService {
 		return linijaRepository.findAll();
 	}
 	
-	public Linija findOdredisteFromStajaliste(Stajaliste stajalaiste) {
-		return linijaRepository.findOdredisteFromStajaliste(stajalaiste);
-	}
-	
-	public Linija findPolazisteFromStajaliste(Stajaliste stajaliste) {
-		return linijaRepository.findPolazisteFromStajaliste(stajaliste);
-	}
-	
 }

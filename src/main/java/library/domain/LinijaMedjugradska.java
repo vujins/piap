@@ -1,5 +1,6 @@
 package library.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class LinijaMedjugradska extends BaseEntity {
 			inverseJoinColumns = @JoinColumn(name = "linija_id", referencedColumnName = "id")
 	)
 	private List<Linija> medjulinije;
-
+	
 	public List<Linija> getMedjulinije() {
 		return medjulinije;
 	}

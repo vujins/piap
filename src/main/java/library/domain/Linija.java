@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Linija extends BaseEntity {
 	
+	//TODO zbog pretrage ne sme da bude @NotNull
+	
 	@ManyToOne
 	@NotNull
 	private Stajaliste polaziste;

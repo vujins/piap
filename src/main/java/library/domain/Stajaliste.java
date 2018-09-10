@@ -11,10 +11,6 @@ public class Stajaliste extends BaseEntity {
 	@NotNull
 	private String naziv;
 
-	public Stajaliste() {
-		
-	}
-
 	public String getNaziv() {
 		return naziv;
 	}

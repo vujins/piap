@@ -25,8 +25,4 @@ public class StajalisteService {
 		return stajalisteRepository.findAll();
 	}
 	
-	public Stajaliste getFromNaziv(String naziv) {
-		return stajalisteRepository.getFromNaziv(naziv);
-	}
-	
 }

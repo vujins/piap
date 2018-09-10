@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import library.domain.Korisnik;
+import library.domain.LinijaMedjugradska;
 import library.repository.KorisnikRepository;
 
 @Service
@@ -31,6 +32,5 @@ public class KorisnikService {
 	
 	public void delete(String username) {
 		korisnikRepository.delete(username);
-		//KorisnikRepository.delete(username);
 	}
 }

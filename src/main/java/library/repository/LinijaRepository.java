@@ -10,9 +10,4 @@ import library.domain.Stajaliste;
 @Repository
 public interface LinijaRepository extends JpaRepository<Linija, Long> {
 
-	@Query("select l from Linija l where odrediste = ?1")
-	public Linija findOdredisteFromStajaliste(Stajaliste stajalaiste);
-
-	@Query("select l from Linija l where polaziste = ?1")
-	public Linija findPolazisteFromStajaliste(Stajaliste stajaliste);
 }

@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -52,6 +53,9 @@ public class Korisnik {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Zaposlen zaposlen;
+	
+	@OneToOne
+	private MesecnaKarta mesecna;
 
 	// flagovi
 	@NotNull
@@ -70,6 +74,14 @@ public class Korisnik {
 	@ManyToMany
 	@JoinTable(name = "korisnik_poruka", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "poruka_id", referencedColumnName = "id"))
 	private List<Poruka> poruke;
+
+	public MesecnaKarta getMesecna() {
+		return mesecna;
+	}
+
+	public void setMesecna(MesecnaKarta mesecna) {
+		this.mesecna = mesecna;
+	}
 
 	public Set<LinijaMedjugradska> getRezervacijaSet() {
 		return rezervacija;

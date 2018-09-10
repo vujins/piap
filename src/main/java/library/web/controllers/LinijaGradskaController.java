@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import library.domain.LinijaGradska;
@@ -35,5 +36,13 @@ public class LinijaGradskaController {
 	@RequestMapping(path = "{id}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable("id") Long id ) {
 		linijaGradskaService.delete(id);
+	}
+	
+	@RequestMapping(path = "{pretraga}", method = RequestMethod.GET)
+	public List<LinijaGradska> pretraga(
+			@RequestParam(name = "broj_linije", required = false) Integer broj_linije, 
+			@RequestParam(name = "polaziste", required = false) String polaziste, 
+			@RequestParam(name = "odrediste", required = false) String odrediste) {
+		return linijaGradskaService.pretraga(broj_linije, polaziste, odrediste);
 	}
 }
