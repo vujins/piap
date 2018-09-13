@@ -8,15 +8,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "mesecna_karta")
-public class MesecnaKarta {
+public class MesecnaKarta extends BaseEntity {
 	
 	public enum tip_karte {
 		mesecna, godisnja
 	}
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date pocetak;
 	@NotNull
 	@Enumerated(EnumType.STRING)

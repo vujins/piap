@@ -7,6 +7,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "poruka")
 public class Poruka extends BaseEntity {
@@ -17,8 +19,10 @@ public class Poruka extends BaseEntity {
 	@OneToOne
 	private LinijaGradska gradska;
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date datum_od;
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date datum_do;
 
 	public String getPoruka() {

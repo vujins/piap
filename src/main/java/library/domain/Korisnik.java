@@ -1,6 +1,8 @@
 package library.domain;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -8,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -16,9 +19,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "korisnik")
-public class Korisnik {
+public class Korisnik implements UserDetails {
+
+	private static final long serialVersionUID = 1L;
 
 	public enum Zaposlen {
 		nezaposlen, zaposlen, student, lice_sa_invaliditetom, penzioner
@@ -46,6 +57,7 @@ public class Korisnik {
 	private String adresa;
 
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private Date rodjendan;
 	@NotNull
 	private String telefon;
@@ -53,14 +65,13 @@ public class Korisnik {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private Zaposlen zaposlen;
-	
+
 	@OneToOne
 	private MesecnaKarta mesecna;
 
-	// flagovi
-	@NotNull
-	@Column(columnDefinition = "BIT default 0")
-	private boolean admin;
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "korisnik_tip", joinColumns = @JoinColumn(name = "korisnik_username"), inverseJoinColumns = @JoinColumn(name = "tip_korisnika"))
+	private Set<TipKorisnika> tipovi;
 	@NotNull
 	@Column(columnDefinition = "BIT default 0")
 	private boolean odobren;
@@ -171,12 +182,12 @@ public class Korisnik {
 		this.zaposlen = zaposlen;
 	}
 
-	public boolean isAdmin() {
-		return admin;
+	public Set<TipKorisnika> getTipovi() {
+		return tipovi;
 	}
 
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
+	public void setTipovi(Set<TipKorisnika> tipovi) {
+		this.tipovi = tipovi;
 	}
 
 	public boolean isOdobren() {
@@ -211,4 +222,34 @@ public class Korisnik {
 		this.poruke = poruke;
 	}
 
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<GrantedAuthority> authorities = new HashSet<>();
+		for (TipKorisnika role : getTipovi()) {
+			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getTip().toString());
+			authorities.add(grantedAuthority);
+		}
+		return authorities;
+
+	}
 }

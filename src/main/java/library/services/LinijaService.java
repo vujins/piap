@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import library.domain.Linija;
-import library.domain.Stajaliste;
 import library.repository.LinijaRepository;
 
 @Service

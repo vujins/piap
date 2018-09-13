@@ -8,4 +8,5 @@ import library.domain.Korisnik;
 @Repository
 public interface KorisnikRepository extends JpaRepository<Korisnik, String> {
 
+	public Korisnik findByUsername(String username);
 }

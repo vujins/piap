@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import library.domain.Korisnik;
-import library.domain.LinijaMedjugradska;
 import library.repository.KorisnikRepository;
 
 @Service

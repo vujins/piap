@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import library.domain.LinijaMedjugradska;
@@ -19,16 +22,21 @@ public class LinijaMedjugradskaService {
 		this.linijaMedjugradskaRepository = linijaMedjugradskaRepository;
 	}
 
-	public List<LinijaMedjugradska> findAll() {
-
-		return linijaMedjugradskaRepository.findAll();
+	public Page<LinijaMedjugradska> findAll() {
+		Pageable page = new PageRequest(2, 2);
+		return linijaMedjugradskaRepository.findAll(page);
 	}
 
 	public LinijaMedjugradska save(LinijaMedjugradska linijaMedjugradska) {
 		return linijaMedjugradskaRepository.save(linijaMedjugradska);
 	}
 
-	public List<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste) {
-		return linijaMedjugradskaRepository.pretraga(polazak, prevoznik, polaziste, odrediste);
+	public List<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste, int stranica) {
+		Pageable page = new PageRequest(stranica, 2);
+		return linijaMedjugradskaRepository.pretraga(polazak, prevoznik, polaziste, odrediste, page);
+	}
+	
+	public Page<LinijaMedjugradska> findAllOrderByPolazakAsc(int stranica) {
+		return linijaMedjugradskaRepository.findAllOrderByPolazakAsc(new PageRequest(stranica, 2));
 	}
 }
