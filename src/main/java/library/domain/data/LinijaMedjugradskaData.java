@@ -8,10 +8,11 @@ import org.jtransfo.MappedBy;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import library.domain.BaseEntity;
 import library.domain.LinijaMedjugradska;
 
 @DomainClass(domainClass = LinijaMedjugradska.class)
-public class LinijaMedjugradskaData extends BaseEntityData {
+public class LinijaMedjugradskaData extends BaseEntity {
 
 	@MappedBy(readOnly = true)
 	private PrevoznikData prevoznik;

@@ -32,4 +32,8 @@ public class KorisnikService {
 	public void delete(String username) {
 		korisnikRepository.delete(username);
 	}
+	
+	public List<Korisnik> findByOdobrenFalse() {
+		return korisnikRepository.findByOdobrenFalse();
+	}
 }

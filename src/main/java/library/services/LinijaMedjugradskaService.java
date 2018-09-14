@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import library.domain.BaseEntity;
 import library.domain.LinijaMedjugradska;
 import library.repository.LinijaMedjugradskaRepository;
 
@@ -31,11 +32,11 @@ public class LinijaMedjugradskaService {
 		return linijaMedjugradskaRepository.save(linijaMedjugradska);
 	}
 
-	public List<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste, Pageable page) {
+	public Page<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste, Pageable page) {
 		return linijaMedjugradskaRepository.pretraga(polazak, prevoznik, polaziste, odrediste, page);
 	}
 	
-	public Page<LinijaMedjugradska> findAllOrderByPolazakAsc(Pageable page) {
+	public Page<BaseEntity> findAllOrderByPolazakAsc(Pageable page) {
 		return linijaMedjugradskaRepository.findAllOrderByPolazakAsc(page);
 	}
 }

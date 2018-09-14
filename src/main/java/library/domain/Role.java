@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Role extends BaseEntity {
 
 	public enum Tip {
-		KORISNIK, ADMIN
+		ROLE_USER, ROLE_ADMIN
 	}
 	
 	@Enumerated(EnumType.STRING)

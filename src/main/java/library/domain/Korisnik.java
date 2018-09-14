@@ -239,7 +239,8 @@ public class Korisnik implements UserDetails {
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return odobren;
+//		return true;
 	}
 
 	@Override

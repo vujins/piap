@@ -2,11 +2,12 @@
 INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, rodjendan, telefon, zaposlen, odobren, email) 
 VALUES ('strahinja', 'strahinja123', 'Strahinja', 'Vujin', 'Zrenjanin', 'Zrenjanin', 'Tamiska 20', '1995-02-15', '062/1981-953', 'zaposlen', 1, 'strahinja.vujin11@gmail.com');
 INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, rodjendan, telefon, zaposlen)
-VALUES ('milena', 'milena123', 'Milena', 'Stevanovic', 'Rakovica', 'Beograd', 'Borova 1', '1996-06-26', '065/8266996', 'student');
+VALUES ('milena', 'milena123', 'Milena', 'Stevanovic', 'Rakovica', 'Beograd', 'Borova 1', '1996-06-26', '065/8266996', 'student'),
+('user', 'user123', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student');
 
 
 insert into role (id, tip)
-values (1, 'KORISNIK'), (2, 'ADMIN');
+values (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');
 
 insert into korisnik_tip (korisnik_username, role)
 values ('strahinja', 1), ('strahinja', 2), ('milena', 1);
