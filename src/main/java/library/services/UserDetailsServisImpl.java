@@ -12,8 +12,12 @@ import library.repository.KorisnikRepository;
 @Service("customUserDetailsService")
 public class UserDetailsServisImpl implements UserDetailsService {
 
-	@Autowired
 	private KorisnikRepository korisnikRepository;
+	
+	@Autowired
+	public UserDetailsServisImpl(KorisnikRepository korisnikRepository) {
+		this.korisnikRepository = korisnikRepository;
+	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

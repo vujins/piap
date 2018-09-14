@@ -3,18 +3,16 @@ package library.domain;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tip_korisnika")
-public class TipKorisnika {
+@Table(name = "role")
+public class Role extends BaseEntity {
 
 	public enum Tip {
 		KORISNIK, ADMIN
 	}
 	
-	@Id
 	@Enumerated(EnumType.STRING)
 	public Tip tip;
 

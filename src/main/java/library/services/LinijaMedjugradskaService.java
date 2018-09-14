@@ -31,12 +31,11 @@ public class LinijaMedjugradskaService {
 		return linijaMedjugradskaRepository.save(linijaMedjugradska);
 	}
 
-	public List<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste, int stranica) {
-		Pageable page = new PageRequest(stranica, 2);
+	public List<LinijaMedjugradska> pretraga(Date polazak, String prevoznik, String polaziste, String odrediste, Pageable page) {
 		return linijaMedjugradskaRepository.pretraga(polazak, prevoznik, polaziste, odrediste, page);
 	}
 	
-	public Page<LinijaMedjugradska> findAllOrderByPolazakAsc(int stranica) {
-		return linijaMedjugradskaRepository.findAllOrderByPolazakAsc(new PageRequest(stranica, 2));
+	public Page<LinijaMedjugradska> findAllOrderByPolazakAsc(Pageable page) {
+		return linijaMedjugradskaRepository.findAllOrderByPolazakAsc(page);
 	}
 }

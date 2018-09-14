@@ -70,8 +70,8 @@ public class Korisnik implements UserDetails {
 	private MesecnaKarta mesecna;
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "korisnik_tip", joinColumns = @JoinColumn(name = "korisnik_username"), inverseJoinColumns = @JoinColumn(name = "tip_korisnika"))
-	private Set<TipKorisnika> tipovi;
+	@JoinTable(name = "korisnik_tip", joinColumns = @JoinColumn(name = "korisnik_username"), inverseJoinColumns = @JoinColumn(name = "role"))
+	private Set<Role> tipovi;
 	@NotNull
 	@Column(columnDefinition = "BIT default 0")
 	private boolean odobren;
@@ -182,11 +182,11 @@ public class Korisnik implements UserDetails {
 		this.zaposlen = zaposlen;
 	}
 
-	public Set<TipKorisnika> getTipovi() {
+	public Set<Role> getTipovi() {
 		return tipovi;
 	}
 
-	public void setTipovi(Set<TipKorisnika> tipovi) {
+	public void setTipovi(Set<Role> tipovi) {
 		this.tipovi = tipovi;
 	}
 
@@ -245,7 +245,7 @@ public class Korisnik implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Set<GrantedAuthority> authorities = new HashSet<>();
-		for (TipKorisnika role : getTipovi()) {
+		for (Role role : getTipovi()) {
 			GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getTip().toString());
 			authorities.add(grantedAuthority);
 		}

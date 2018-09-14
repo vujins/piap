@@ -5,11 +5,11 @@ INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, r
 VALUES ('milena', 'milena123', 'Milena', 'Stevanovic', 'Rakovica', 'Beograd', 'Borova 1', '1996-06-26', '065/8266996', 'student');
 
 
-insert into tip_korisnika (tip)
-values ('KORISNIK'), ('ADMIN');
+insert into role (id, tip)
+values (1, 'KORISNIK'), (2, 'ADMIN');
 
-insert into korisnik_tip (korisnik_username, tip_korisnika)
-values ('strahinja', 'KORISNIK'), ('strahinja', 'ADMIN'), ('milena', 'KORISNIK');
+insert into korisnik_tip (korisnik_username, role)
+values ('strahinja', 1), ('strahinja', 2), ('milena', 1);
 
 INSERT INTO stajaliste (id, naziv)
 VALUES (1, 'Beograd'), (2, 'Zrenjanin'), (3, 'Subotica'), (4, 'Perlez'), (5, 'Batajnica'), (6, 'Novi Sad'),
