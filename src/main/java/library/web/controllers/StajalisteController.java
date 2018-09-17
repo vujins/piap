@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import library.domain.Stajaliste;
@@ -24,15 +25,22 @@ public class StajalisteController {
 		this.stajalisteService = stajalisteService;
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.GET)
 	public List<Stajaliste> findAll() {
 		return stajalisteService.findAll();
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(method = RequestMethod.POST)
 	public Stajaliste save(@RequestBody Stajaliste stajaliste) {
 		return stajalisteService.save(stajaliste);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(path = "{naziv}", method = RequestMethod.GET)
+	public Stajaliste findByNaziv(@RequestParam(name = "naziv") String naziv) {
+		return stajalisteService.findByNaziv(naziv);
 	}
 	
 }

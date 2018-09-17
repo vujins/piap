@@ -8,4 +8,5 @@ import library.domain.Stajaliste;
 @Repository
 public interface StajalisteRepository extends JpaRepository<Stajaliste, Long> {
 	
+	public Stajaliste findByNaziv(String naziv);
 }

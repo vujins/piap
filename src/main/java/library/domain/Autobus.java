@@ -7,13 +7,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "autobus")
 public class Autobus extends BaseEntity {
 
+	@NotNull
 	private String marka;
+	@NotNull
 	private String model;
+	@NotNull
 	private int broj_sedista;
 	
 	@OneToMany

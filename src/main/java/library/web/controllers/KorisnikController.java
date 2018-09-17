@@ -58,18 +58,23 @@ public class KorisnikController {
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@RequestMapping(path = "odobren", method = RequestMethod.GET)
+	@RequestMapping(path = "neodobreni", method = RequestMethod.GET)
 	public List<Korisnik> findByOdobrenFlase() {
 		return korisnikService.findByOdobrenFalse();
 	}
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(path = "odobri", method = RequestMethod.PUT)
-	public Korisnik odobri(@RequestParam(name = "korisnik") String username) {
+	public void odobri(@RequestBody String username) {
 		Korisnik k = korisnikService.findOne(username);
 		k.setOdobren(true);
 		save(k);
-		return k;
+	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@RequestMapping(path = "odbij", method = RequestMethod.DELETE)
+	public void delete(@RequestParam(name = "username") String username) {
+		korisnikService.delete(username);
 	}
 
 }
