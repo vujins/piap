@@ -3,6 +3,7 @@ package library.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import library.services.LinijaGradskaService;
 
 @RestController
 @RequestMapping("/gradska")
+@CrossOrigin(origins = "http://localhost:4200")
 public class LinijaGradskaController {
 	private LinijaGradskaService linijaGradskaService;
 

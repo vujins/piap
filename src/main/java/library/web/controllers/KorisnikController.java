@@ -1,7 +1,9 @@
 package library.web.controllers;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import library.domain.Korisnik;
+import library.domain.Role;
+import library.domain.Role.Tip;
 import library.services.KorisnikService;
 
 @RestController
@@ -30,7 +34,20 @@ public class KorisnikController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public Korisnik save(@RequestBody Korisnik user) {
+		Role user_role = new Role();
+		user_role.setId(new Long(1));
+		user_role.setTip(Tip.ROLE_USER);
+		Set<Role> tipovi = new HashSet<>();
+		tipovi.add(user_role);
+		user.setTipovi(tipovi);
+	
 		return korisnikService.save(user);
+	}
+	
+	@RequestMapping(path = "postoji", method = RequestMethod.GET)
+	public boolean postoji(@RequestParam(name = "username") String username) {
+		if (korisnikService.findOne(username) != null) return true;
+		else return false;
 	}
 
 	@PreAuthorize("isAuthenticated()")
