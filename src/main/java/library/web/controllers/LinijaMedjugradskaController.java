@@ -38,11 +38,10 @@ public class LinijaMedjugradskaController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Pageable pageable;
-		// TODO promeni broj stranica
 		if (!"anonymousUser".equals(auth.getPrincipal().toString())) {
-			pageable = new PageRequest(stranica, 3);
+			pageable = new PageRequest(stranica, 20);
 		} else {
-			pageable = new PageRequest(stranica, 2);
+			pageable = new PageRequest(stranica, 10);
 		}
 		return linijaMedjugradskaService.findAllOrderByPolazakAsc(pageable);
 
@@ -66,39 +65,12 @@ public class LinijaMedjugradskaController {
 		Pageable pageable;
 		// TODO promeni broj stranica
 		if (!"anonymousUser".equals(auth.getPrincipal().toString())) {
-			pageable = new PageRequest(stranica, 3);
+			pageable = new PageRequest(stranica, 20);
 		} else {
-			pageable = new PageRequest(stranica, 2);
+			pageable = new PageRequest(stranica, 10);
 		}
 
 		return linijaMedjugradskaService.pretraga(polazak, prevoznik, polaziste, odrediste, pageable);
 	}
-
-	// -------------------------------GOST---------------------------------
-
-//	@RequestMapping(path="gost", method = RequestMethod.GET)
-//	public Page<LinijaMedjugradskaData> findAllGost(@RequestParam(name = "stranica") int stranica) {
-//		return new JTransfoImpl().convertList(linijaMedjugradskaService.findAllOrderByPolazakAsc(stranica), LinijaMedjugradskaData.class);
-//	}
-
-//	@RequestMapping(path = "pretraga/gost", method = RequestMethod.GET)
-//	public List<LinijaMedjugradskaData> pretragaGost(@RequestParam(name = "polazak") Date polazak,
-//			@RequestParam(name = "prevoznik", required = false) String prevoznik,
-//			@RequestParam(name = "polaziste", required = false) String polaziste,
-//			@RequestParam(name = "odrediste", required = false) String odrediste,
-//			@RequestParam(name = "stranica") int stranica) {
-//
-//		// TODO vrati jtransfo objekte ako korisnik nije ulogovan
-//
-////		if (ulogovan) {
-////
-////		} else {
-////
-////		}
-//
-//		return new JTransfoImpl().convertList(
-//				linijaMedjugradskaService.pretraga(polazak, prevoznik, polaziste, odrediste, stranica),
-//				LinijaMedjugradskaData.class);
-//	}
 
 }

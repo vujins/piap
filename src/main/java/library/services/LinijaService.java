@@ -27,4 +27,10 @@ public class LinijaService {
 		return linijaRepository.findAll();
 	}
 	
+	public Linija findByPolazisteAndOdrediste(String polaziste, String odrediste) {
+		Linija l =linijaRepository.findByPolazisteAndOdrediste(polaziste, odrediste);
+		System.out.println(l);
+		return l;
+	}
+	
 }
