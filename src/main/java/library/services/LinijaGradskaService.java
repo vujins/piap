@@ -1,8 +1,8 @@
 package library.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import library.domain.LinijaGradska;
@@ -22,16 +22,16 @@ public class LinijaGradskaService {
 		return linijaGradskaRepository.save(linijaGradska);
 	}
 	
-	public List<LinijaGradska> findAll() {
-		return linijaGradskaRepository.findAll();
+	public Page<LinijaGradska> findAll(Pageable page) {
+		return linijaGradskaRepository.findAll(page);
 	}
 	
 	public void delete(Long id) {
 		linijaGradskaRepository.delete(id);
 	}
 	
-	public List<LinijaGradska> pretraga(Integer broj_linije, String polaziste, String odrediste){
-		return linijaGradskaRepository.pretraga(broj_linije, polaziste, odrediste);
+	public Page<LinijaGradska> pretraga(Integer broj_linije, String polaziste, String odrediste, Pageable page){
+		return linijaGradskaRepository.pretraga(broj_linije, polaziste, odrediste, page);
 	}
 	
 }

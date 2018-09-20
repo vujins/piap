@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -41,8 +42,6 @@ public class Korisnik implements UserDetails {
 
 	@NotNull
 	private String password;
-
-	// TODO staviti da budu svi @NotNull osim email-a
 
 	@NotNull
 	private String ime;
@@ -78,10 +77,6 @@ public class Korisnik implements UserDetails {
 
 	// TODO zavrsi rezervaciju
 
-	@ManyToMany(targetEntity = LinijaMedjugradska.class)
-	@JoinTable(name = "korisnik_rezervacija", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "medjugradska_id", referencedColumnName = "id"))
-	private Set<LinijaMedjugradska> rezervacija;
-
 	@ManyToMany
 	@JoinTable(name = "korisnik_poruka", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "poruka_id", referencedColumnName = "id"))
 	private List<Poruka> poruke;
@@ -92,14 +87,6 @@ public class Korisnik implements UserDetails {
 
 	public void setMesecna(MesecnaKarta mesecna) {
 		this.mesecna = mesecna;
-	}
-
-	public Set<LinijaMedjugradska> getRezervacijaSet() {
-		return rezervacija;
-	}
-
-	public void setRezervacijaSet(Set<LinijaMedjugradska> rezervacija) {
-		this.rezervacija = rezervacija;
 	}
 
 	public String getUsername() {
@@ -204,14 +191,6 @@ public class Korisnik implements UserDetails {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Set<LinijaMedjugradska> getRezervacija() {
-		return rezervacija;
-	}
-
-	public void setRezervacija(Set<LinijaMedjugradska> rezervacija) {
-		this.rezervacija = rezervacija;
 	}
 
 	public List<Poruka> getPoruke() {

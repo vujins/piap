@@ -57,6 +57,8 @@ public class KorisnikController {
 		return SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 	}
 	
+	
+	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(path = "neodobreni", method = RequestMethod.GET)
 	public List<Korisnik> findByOdobrenFlase() {
@@ -76,5 +78,6 @@ public class KorisnikController {
 	public void delete(@RequestParam(name = "username") String username) {
 		korisnikService.delete(username);
 	}
+
 
 }

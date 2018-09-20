@@ -59,15 +59,11 @@ values (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (3, 6),
 (4, 10), (4, 11), (4, 12), (4, 2), (4, 3);
 
 insert into gradska (id, broj_linije, red_voznje, vozac_id)
-values (1, 23, 'nikad', 3), (2, 52, 'nekad :p', 2);
+values (1, 23, 'nikad', 3), (2, 52, 'nekad :p', 2), (3, 59, '13:50', 2);
 
 insert into gradska_linija (gradska_id, linija_id)
 values (1, 7), (1, 8), (1, 9);
 
-
-
-insert into korisnik_rezervacija (korisnik_username, medjugradska_id)
-values ('strahinja', 1), ('strahinja', 2), ('milena', 3);
 
 
 insert into poruka (id, poruka, gradska_id, datum_od, datum_do)
