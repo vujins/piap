@@ -1,14 +1,14 @@
 
 INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, rodjendan, telefon, zaposlen, odobren, email) 
 VALUES ('strahinja', 'f60079653bad85f8e96fda2c7e47415881d9e563', 'Strahinja', 'Vujin', 'Zrenjanin', 'Zrenjanin', 'Tamiska 20', '1995-02-15', '062/1981-953', 'zaposlen', 1, 'strahinja.vujin11@gmail.com');
-INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, rodjendan, telefon, zaposlen)
-VALUES ('milena', '47cea8db095a396756ed667d70c24b61d81d99d3', 'Milena', 'Stevanovic', 'Rakovica', 'Beograd', 'Borova 1', '1996-06-26', '065/8266996', 'student'),
-('user1', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student'),
-('user2', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student'),
-('user3', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student'),
-('user4', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student'),
-('user5', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student'),
-('user6', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student');
+INSERT INTO korisnik (username, password, ime, prezime, opstina, grad, adresa, rodjendan, telefon, zaposlen, odobren)
+VALUES ('milena', '47cea8db095a396756ed667d70c24b61d81d99d3', 'Milena', 'Stevanovic', 'Rakovica', 'Beograd', 'Borova 1', '1996-06-26', '065/8266996', 'student', 1),
+('user1', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0),
+('user2', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0),
+('user3', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0),
+('user4', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0),
+('user5', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0),
+('user6', '95c946bf622ef93b0a211cd0fd028dfdfcf7e39e', 'USER', 'user :O', 'asd', 'asd', 'aasd 1', '1996-06-26', '065/8266996', 'student', 0);
 
 
 insert into role (id, tip)
@@ -64,13 +64,17 @@ values (1, 23, 'nikad', 3), (2, 52, 'nekad :p', 2), (3, 59, '13:50', 2);
 insert into gradska_linija (gradska_id, linija_id)
 values (1, 7), (1, 8), (1, 9);
 
-
-
 insert into poruka (id, poruka, gradska_id, datum_od, datum_do)
 values (1, 'Linija 23 je otkazana', 1, '2018-09-07 12:00', '2018-09-10 12:00');
 
 insert into korisnik_poruka (korisnik_username, poruka_id)
 values ('strahinja', 1), ('milena', 1);
+
+
+
+
+insert into cene(tip, cena)
+values ('mesecna', 1100), ('godisnja', 12000);
 
 
 

@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -65,9 +63,6 @@ public class Korisnik implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Zaposlen zaposlen;
 
-	@OneToOne
-	private MesecnaKarta mesecna;
-
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "korisnik_tip", joinColumns = @JoinColumn(name = "korisnik_username"), inverseJoinColumns = @JoinColumn(name = "role"))
 	private Set<Role> tipovi;
@@ -80,14 +75,6 @@ public class Korisnik implements UserDetails {
 	@ManyToMany
 	@JoinTable(name = "korisnik_poruka", joinColumns = @JoinColumn(name = "korisnik_username", referencedColumnName = "username"), inverseJoinColumns = @JoinColumn(name = "poruka_id", referencedColumnName = "id"))
 	private List<Poruka> poruke;
-
-	public MesecnaKarta getMesecna() {
-		return mesecna;
-	}
-
-	public void setMesecna(MesecnaKarta mesecna) {
-		this.mesecna = mesecna;
-	}
 
 	public String getUsername() {
 		return username;
