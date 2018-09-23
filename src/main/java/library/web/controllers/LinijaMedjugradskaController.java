@@ -37,12 +37,13 @@ public class LinijaMedjugradskaController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		Pageable pageable;
-		if (!"anonymousUser".equals(auth.getPrincipal().toString())) {
-			pageable = new PageRequest(stranica, 20);
-		} else {
-			pageable = new PageRequest(stranica, 10);
-		}
+		Pageable pageable = new PageRequest(stranica, 10);
+//		if (!"anonymousUser".equals(auth.getPrincipal().toString())) {
+//			pageable = new PageRequest(stranica, 20);
+//		} else {
+//			pageable = new PageRequest(stranica, 10);
+//		}
+		
 		return linijaMedjugradskaService.findAllOrderByPolazakAsc(pageable);
 
 	}
